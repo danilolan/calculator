@@ -30,6 +30,9 @@ export default class Calculator extends Component{
     }
 
     addDigit(n){
+        if(this.state.values[0] >= 1000000000){
+            return
+        }
         if(n === '.' && this.state.displayValue.includes('.')){
             return
         }
@@ -74,6 +77,13 @@ export default class Calculator extends Component{
                     break
             }
             values[1] = 0
+
+            var strValue = values[0].toString()
+            if(strValue.length > 10){
+                strValue = strValue.substr(0,10)
+                console.log(strValue)
+                values[0] = parseFloat(strValue)
+            }
 
             this.setState({
                 displayValue: values[0],

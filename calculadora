@@ -1,0 +1,223 @@
+[33mcommit 2b4ad4a1e5ce3a2fd480cc2cc76391ae31de4f75[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Danilo Herculano <didoherculano@gmail.com>
+Date:   Fri Sep 3 11:59:09 2021 -0300
+
+    Calculadora
+
+[1mdiff --git a/src/components/Button.jsx b/src/components/Button.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0441b25[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Button.jsx[m
+[36m@@ -0,0 +1,19 @@[m
+[32m+[m[32mimport React from 'react'[m
+[32m+[m[32mimport './button.css'[m
+[32m+[m
+[32m+[m[32mexport default function(props){[m
+[32m+[m
+[32m+[m[32m    let classes = 'button '[m
+[32m+[m[32m    classes += props.operation ? 'operation' : ''[m
+[32m+[m[32m    classes += props.double ? 'double' : ''[m
+[32m+[m[32m    classes += props.triple ? 'triple' : ''[m
+[32m+[m
+[32m+[m[32m    return([m
+[32m+[m[32m        <button[m[41m [m
+[32m+[m[32m            className={classes}[m
+[32m+[m[32m            onClick={e => props.click && props.click(props.label)}[m
+[32m+[m[32m        >[m
+[32m+[m[32m            {props.label}[m
+[32m+[m[32m        </button>[m
+[32m+[m[32m    )[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Display.jsx b/src/components/Display.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6e75f32[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Display.jsx[m
+[36m@@ -0,0 +1,4 @@[m
+[32m+[m[32mimport React from 'react'[m
+[32m+[m[32mimport './display.css'[m
+[32m+[m
+[32m+[m[32mexport default props => <div className="display">{props.value}</div>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/button.css b/src/components/button.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..67153b7[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/button.css[m
+[36m@@ -0,0 +1,43 @@[m
+[32m+[m[32m:root{[m
+[32m+[m[32m    --bg-button: #f0f0f0;[m
+[32m+[m[32m    --border-button: solid 1px #888;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button {[m
+[32m+[m[32m    font-size: 1.4em;[m
+[32m+[m[32m    background-color: var(--bg-button);[m
+[32m+[m[32m    border: none;[m
+[32m+[m[32m    border-right: var(--border-button);[m
+[32m+[m[32m    border-bottom: var(--border-button);[m
+[32m+[m[32m    outline: none;[m
+[32m+[m[32m    cursor: pointer;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button:hover{[m
+[32m+[m[32m    background-color: #ddd;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button:active{[m
+[32m+[m[32m    background-color: #ccc;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button.double{[m
+[32m+[m[32m    grid-column: span 2;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button.triple{[m
+[32m+[m[32m    grid-column: span 3;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button.operation{[m
+[32m+[m[32m    background-color: #fa8231;[m
+[32m+[m[32m    color: #fff[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button.operation:hover{[m
+[32m+[m[32m    background-color: #fa8231dd;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button.operation:active{[m
+[32m+[m[32m    background-color: #fa8231cc;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/display.css b/src/components/display.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d9f8184[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/display.css[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m.display{[m
+[32m+[m[32m    grid-column: span 4;[m
+[32m+[m[32m    background-color: #0004;[m
+[32m+[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    justify-content: flex-end;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m    padding: 20px;[m
+[32m+[m[32m    font-size: 2.1em;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/fonts/RobotoMono-VariableFont_wght.ttf b/src/fonts/RobotoMono-VariableFont_wght.ttf[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d2b4746[m
+Binary files /dev/null and b/src/fonts/RobotoMono-VariableFont_wght.ttf differ
+[1mdiff --git a/src/index.css b/src/index.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f446eb6[m
+[1m--- /dev/null[m
+[1m+++ b/src/index.css[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m@font-face {[m
+[32m+[m[32m  font-family: 'RobotoMono';[m
+[32m+[m[32m  src: url(./fonts/RobotoMono-VariableFont_wght.ttf);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m* {[m
+[32m+[m[32m  font-family: 'RobotoMono', monospace;[m
+[32m+[m[32m  font-weight: 100;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mbody {[m
+[32m+[m[32m  display:flex;[m
+[32m+[m[32m  height: 100vh;[m
+[32m+[m[32m  justify-content: center;[m
+[32m+[m[32m  align-items: center;[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m
+[32m+[m[32m  color: #fff;[m
+[32m+[m[32m  background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/index.js b/src/index.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f2eaf53[m
+[1m--- /dev/null[m
+[1m+++ b/src/index.js[m
+[36m@@ -0,0 +1,13 @@[m
+[32m+[m[32mimport React from 'react';[m
+[32m+[m[32mimport ReactDOM from 'react-dom';[m
+[32m+[m[32mimport './index.css';[m
+[32m+[m[32mimport Calculator from './main/Calculator'[m
+[32m+[m
+[32m+[m[32mReactDOM.render([m
+[32m+[m[32m  <div>[m
+[32m+[m[32m    <h1>Calculadora</h1>[m
+[32m+[m[32m    <Calculator></Calculator>[m
+[32m+[m[32m  </div>,[m
+[32m+[m[32m  document.getElementById('root')[m
+[32m+[m[32m);[m
+[32m+[m
+[1mdiff --git a/src/main/Calculator.jsx b/src/main/Calculator.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..45f62d4[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/Calculator.jsx[m
+[36m@@ -0,0 +1,118 @@[m
+[32m+[m[32mimport React, { Component } from 'react'[m
+[32m+[m[32mimport './calculator.css'[m
+[32m+[m
+[32m+[m[32mimport Button from '../components/Button'[m
+[32m+[m[32mimport Display from '../components/Display'[m
+[32m+[m
+[32m+[m[32mconst initialState = {[m
+[32m+[m[32m    displayValue: '0',[m
+[32m+[m[32m    clearDisplay: false,[m
+[32m+[m[32m    operation: null,[m
+[32m+[m[32m    values: [0,0],[m
+[32m+[m[32m    current: 0[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport default class Calculator extends Component{[m
+[32m+[m[41m    [m
+[32m+[m[32m    state = {...initialState}[m
+[32m+[m
+[32m+[m[32m    constructor(props){[m
+[32m+[m[32m        super(props)[m
+[32m+[m
+[32m+[m[32m        this.clearMemory = this.clearMemory.bind(this)[m
+[32m+[m[32m        this.addDigit = this.addDigit.bind(this)[m
+[32m+[m[32m        this.setOperation = this.setOperation.bind(this)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    clearMemory(){[m
+[32m+[m[32m        this.setState({...initialState})[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    addDigit(n){[m
+[32m+[m[32m        if(n === '.' && this.state.displayValue.includes('.')){[m
+[32m+[m[32m            return[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay[m
+[32m+[m[32m        const currentValue = clearDisplay ? '' : this.state.displayValue[m
+[32m+[m[32m        const displayValue = currentValue + n[m
+[32m+[m[32m        this.setState({displayValue, clearDisplay: false})[m
+[32m+[m
+[32m+[m[32m        if(n !== '.'){[m
+[32m+[m[32m            const i = this.state.current[m
+[32m+[m[32m            const newValue = parseFloat(displayValue)[m
+[32m+[m[32m            const values = [...this.state.values][m
+[32m+[m[32m            values[i] = newValue[m
+[32m+[m[32m            this.setState({values})[m
+[32m+[m[32m            //console.log(values)[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        console.log(this.state.values)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    setOperation(op){[m
+[32m+[m[32m        if(this.state.current === 0){[m
+[32m+[m[32m            this.setState({ operation: op, current: 1, clearDisplay: true})[m
+[32m+
